@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+	    <link href="./js/libraries/play-on-click/play-on-click.css" rel="stylesheet">
+	    <!-- If you want to use a different A-Frame version -->
+		<!--<script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>-->
+	    <script src="./js/libraries/aframe/aframe.min.js"></script>
+	    <script src="./js/libraries/aframe/aframe-extras.min.js"></script>
+	    <script src="./js/libraries/play-on-click/play-on-click.js"></script>
+  	</head>
+
+	<body>
+		<div id="infoOverlay"> 
+			<!-- Play-on-click banner ensures sound and video works correctly. -->
+			<div class="overlayGreyout" id="click-anywhere-banner">
+				<div id="click-anywhere-image">
+					<img src="./js/libraries/play-on-click/play-on-click.png">
+				</div>
+			</div>
+		</div>
+
+		<a-scene 
+			preloader="Just a moment...; clickToClose: false;"
+			webxr="optionalFeatures: dom-overlay,unbounded; overlayElement: #infoOverlay;"
+			loading-screen="backgroundColor: #111111"
+			gltf-model="dracoDecoderPath: ./js/libraries/draco/"
+			background="color: black">
+
+			<!-- References to files go here. -->
+			<a-assets>
+				<!-- Images, sounds, videos. -->
+				<img
+					src="./assets/sky.jpg"
+					crossorigin="anonymous"
+					id="sky">
+				<!-- Note that images don't use a close tag. -->
+				<audio 
+					src="./assets/cherry_trees.mp3" 
+					preload="auto"
+					crossorigin="anonymous"
+					id="bgsound">
+				</audio>
+				
+				<video 
+					src="./assets/cat_plays_theremin_nosound.mp4" 
+					autoplay="true" 
+					loop="true"
+					crossorigin="anonymous"
+					id="cat"> 
+				</video>
+				
+				<!-- GLTF 3d objects. -->			
+				<a-asset-item 
+					src="./assets/rigging06_draco.glb"
+					id="weirdo"> 
+				</a-asset-item>
+				
+				<a-asset-item
+					src="./assets/Stairs_draco.glb"
+					id="stairs"> 
+				</a-asset-item>
+			</a-assets>
+
+			<!-- Without a background image, the live video image shows. -->
+			<!--<a-sky
+				src="#sky">
+			</a-sky>-->
+
+			<!-- Invisible play-on-click trigger. -->
+			<a-entity play-on-click></a-entity>
+
+			<a-sphere 
+				color="yellow"
+				visible="false"
+				radius="5"
+				position="0 0 0">
+				<a-sound
+					src="#bgsound"
+					autoplay="true"
+					loop="true"
+					volume="0.5">
+				</a-sound>
+			</a-sphere>
+
+			<a-entity 
+				gltf-model="#stairs"
+				position="0 0 0"
+				rotation="0 0 0"
+				scale="10.0 10.0 10.0">
+			</a-entity>
+
+			<a-entity 
+				gltf-model="#weirdo"
+				position="-28 -9 0"
+				rotation="0 90 0"
+				scale="1.0 1.0 1.0"
+				animation-mixer="clip: *">
+			</a-entity>
+
+			<a-video 
+				src="#cat"
+				position="0 0 -18.2" 
+				rotation="0 0 -90" 
+				width="7" 
+				height="7">
+			</a-video>
+
+		</a-scene>	
+	</body>
+
+</html>
